@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An animated capstone website outline.">
+  <title>The Next Chapter — Capstone</title>
+  <style>
+    :root { --brown:#503921; --pink:#EB3C96; --cyan:#2DBECD; --cream:#f6f0e8; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--cream); color:var(--brown); font-family:Arial,Helvetica,sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .mono { font:700 11px/1 "Courier New",monospace; letter-spacing:.12em; text-transform:uppercase; }
+    .nav { position:absolute; z-index:10; inset:0 0 auto; height:78px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 3vw; color:var(--cream); border-bottom:1px solid #f6f0e84d; }
+    .brand { font-size:17px; font-weight:900; letter-spacing:-.04em; }
+    .brand b { color:var(--pink); }
+    .nav-links { display:flex; gap:34px; }
+    .nav-links a { position:relative; }
+    .nav-links a:after { content:""; position:absolute; left:0; right:0; bottom:-8px; height:2px; background:var(--cyan); transform:scaleX(0); transform-origin:right; transition:.35s; }
+    .nav-links a:hover:after { transform:scaleX(1); transform-origin:left; }
+    .nav .edition { justify-self:end; }
+    .hero { position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:120px 3vw 6vh; color:var(--cream); background:var(--brown); isolation:isolate; overflow:hidden; }
+    .hero:before { content:""; position:absolute; z-index:-2; width:55vw; aspect-ratio:1; right:-10vw; top:-16vw; border-radius:50%; background:var(--pink); filter:blur(1px); opacity:.88; animation:blob 9s ease-in-out infinite; }
+    .hero:after { content:""; position:absolute; z-index:-1; width:34vw; aspect-ratio:1; right:8vw; top:8vw; border:1px solid #f6f0e866; border-radius:50%; box-shadow:0 0 0 7vw #2dbecd1a,0 0 0 14vw #2dbecd10; animation:spin 18s linear infinite; }
+    .hero .eyebrow { position:absolute; top:18vh; left:3.2vw; color:var(--cyan); }
+    .hero h1 { margin:0; font-size:clamp(76px,16.2vw,250px); font-weight:900; line-height:.7; letter-spacing:-.1em; text-transform:uppercase; }
+    .hero h1 span { display:block; width:max-content; animation:titleIn 1s cubic-bezier(.17,.84,.22,1) both; }
+    .hero h1 span:nth-child(2) { margin-left:16vw; color:transparent; -webkit-text-stroke:2px var(--cream); animation-delay:.12s; }
+    .hero h1 span:nth-child(3) { animation-delay:.24s; }
+    .enter { position:absolute; right:3vw; bottom:5.5vh; display:flex; align-items:center; gap:16px; }
+    .enter i { width:48px; height:48px; display:grid; place-items:center; border:1px solid #f6f0e880; border-radius:50%; font:normal 20px/1 Arial; animation:bob 1.6s ease-in-out infinite; }
+    .months { position:absolute; right:4vw; top:16vh; display:flex; gap:8px; }
+    .months span { width:40px; height:40px; display:grid; place-items:center; border:1px solid #f6f0e866; border-radius:50%; }
+    .ticker { height:52px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; background:var(--cyan); color:var(--brown); }
+    .ticker div { font-size:13px; animation:ticker 20s linear infinite; }
+    .ticker b { padding:0 24px; color:var(--pink); }
+    section { padding:34px 3vw 10vw; }
+    .section-label { padding:18px 0 32px; border-top:1px solid #5039213d; }
+    .cards { display:grid; grid-template-columns:1.2fr .8fr 1fr; gap:12px; }
+    .card { position:relative; min-height:520px; padding:24px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; transition:transform .45s,border-radius .45s; }
+    .card:hover { transform:translateY(-12px); border-radius:0 0 80px 0; }
+    .card small { position:absolute; top:24px; left:24px; }
+    .card h2 { position:relative; z-index:2; margin:0; font-size:clamp(42px,5.3vw,82px); line-height:.87; letter-spacing:-.075em; text-transform:uppercase; }
+    .card .arrow { position:absolute; top:18px; right:22px; font-size:28px; transition:.4s; }
+    .card:hover .arrow { transform:rotate(45deg) scale(1.2); }
+    .summary { background:var(--pink); color:var(--cream); }
+    .presentation { background:var(--cyan); }
+    .takeaway-card { background:var(--brown); color:var(--cream); }
+    .play { position:absolute; top:28%; left:50%; width:96px; height:96px; transform:translateX(-50%); display:grid; place-items:center; border:1px solid currentColor; border-radius:50%; transition:.45s; }
+    .presentation:hover .play { color:var(--cream); background:var(--pink); transform:translateX(-50%) rotate(120deg) scale(1.15); }
+    .count { position:absolute; top:10%; right:-2%; color:var(--cyan); font-size:clamp(110px,15vw,215px); font-weight:900; letter-spacing:-.1em; }
+    .takeaways { color:var(--cream); background:var(--pink); }
+    .takeaways .section-label,.pathways .section-label { border-color:#f6f0e84d; }
+    .takeaway-row { display:grid; grid-template-columns:64px 1fr auto; align-items:center; min-height:110px; border-bottom:1px solid #f6f0e84d; transition:.35s; }
+    .takeaway-row:first-child { border-top:1px solid #f6f0e84d; }
+    .takeaway-row:hover { padding:0 22px; color:var(--brown); background:var(--cyan); }
+    .takeaway-row h3 { margin:0; font-size:clamp(34px,5.2vw,78px); line-height:1; letter-spacing:-.06em; text-transform:uppercase; }
+    .takeaway-row i { font:normal 28px/1 Arial; transition:.35s; }
+    .takeaway-row:hover i { transform:rotate(45deg); }
+    .timeline { min-height:850px; overflow:hidden; }
+    .timeline-title { display:flex; align-items:flex-start; }
+    .timeline-title h2 { margin:0; font-size:clamp(105px,22vw,335px); line-height:.8; letter-spacing:-.11em; }
+    .timeline-title span { margin:15px 0 0 25px; writing-mode:vertical-rl; }
+    .track { position:relative; width:90%; height:190px; margin:110px auto 0; }
+    .track:before { content:""; position:absolute; top:31px; width:100%; height:2px; background:var(--brown); transform-origin:left; animation:grow 3s ease-in-out infinite alternate; }
+    .moment { position:absolute; top:0; }
+    .moment:nth-child(1) { left:0; } .moment:nth-child(2) { left:48%; } .moment:nth-child(3) { right:0; text-align:right; }
+    .dot { width:64px; height:64px; display:grid; place-items:center; border-radius:50%; background:var(--pink); position:relative; }
+    .dot:after { content:""; width:8px; height:8px; border-radius:50%; background:var(--brown); }
+    .dot:before { content:""; position:absolute; inset:0; border:1px solid var(--pink); border-radius:50%; animation:pulse 2s ease-out infinite; }
+    .moment:last-child .dot { margin-left:auto; }
+    .moment strong { display:block; margin-top:20px; font-size:46px; letter-spacing:-.07em; }
+    .moment small { display:block; }
+    .track-footer { display:grid; grid-template-columns:repeat(3,1fr); padding-top:18px; border-top:1px solid #5039213d; }
+    .track-footer span:nth-child(2) { text-align:center; } .track-footer span:last-child { text-align:right; }
+    .pathways { color:var(--cream); background:var(--brown); }
+    .path-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .path { position:relative; min-height:74vh; padding:26px; display:flex; align-items:flex-end; overflow:hidden; }
+    .path:before { content:""; position:absolute; width:80%; aspect-ratio:1; top:-58%; right:-22%; border:1px solid currentColor; border-radius:50%; opacity:.4; transition:.9s; }
+    .path:hover:before { transform:translate(-18%,38%) scale(1.55); }
+    .path h2 { position:relative; z-index:1; margin:0; font-size:clamp(58px,8.3vw,128px); line-height:.82; letter-spacing:-.085em; text-transform:uppercase; }
+    .path small { position:absolute; top:26px; left:26px; }
+    .path-one { color:var(--brown); background:var(--cyan); }
+    .path-two { background:var(--pink); }
+    .path-orb { position:absolute; z-index:2; right:26px; bottom:26px; width:108px; height:108px; display:grid; place-items:center; text-align:center; color:var(--cream); background:var(--brown); border-radius:50%; transition:.4s; }
+    .path:hover .path-orb { transform:rotate(12deg) scale(1.14); }
+    .branch { display:grid; grid-template-columns:.85fr 1.15fr; padding:10vw 3vw; }
+    .branch-head { position:sticky; top:35px; align-self:start; }
+    .branch-head h2 { margin:55px 0 0; font-size:clamp(62px,8.6vw,135px); line-height:.78; letter-spacing:-.09em; text-transform:uppercase; }
+    .talent { background:var(--cyan); }
+    .leaders { color:var(--cream); background:var(--pink); }
+    .branch-list { border-top:1px solid currentColor; }
+    .branch-row { display:grid; grid-template-columns:52px 1fr auto; align-items:center; min-height:120px; border-bottom:1px solid currentColor; transition:.35s; }
+    .branch-row:hover { padding:0 20px; color:var(--cream); background:var(--brown); }
+    .branch-row h3 { margin:0; font-size:clamp(27px,3vw,48px); line-height:1; letter-spacing:-.055em; text-transform:uppercase; }
+    .branch-row i { font:normal 30px/1 Arial; transition:.35s; }
+    .branch-row:hover i { transform:rotate(135deg); }
+    footer { min-height:420px; padding:34px 3vw; display:grid; grid-template-columns:1fr auto 1fr; align-items:end; color:var(--cream); background:var(--brown); }
+    footer p { justify-self:end; margin:0; }
+    .footer-orb { width:180px; height:180px; display:grid; place-items:center; border:1px solid #f6f0e84d; border-radius:50%; font-size:46px; animation:float 4s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(45px); transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity:1; transform:none; }
+    .cursor { position:fixed; z-index:100; width:18px; height:18px; pointer-events:none; border-radius:50%; background:var(--cyan); mix-blend-mode:difference; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+    @keyframes titleIn { from{opacity:0;transform:translateY(110%) rotate(3deg)} to{opacity:1;transform:none} }
+    @keyframes blob { 50%{transform:translate(-6vw,8vh) scale(1.18);border-radius:38% 62% 55% 45%} }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    @keyframes bob { 50%{transform:translateY(7px)} }
+    @keyframes ticker { to{transform:translateX(-50%)} }
+    @keyframes grow { from{transform:scaleX(.1)} to{transform:scaleX(1)} }
+    @keyframes pulse { to{inset:-25px;opacity:0} }
+    @keyframes float { 50%{transform:translateY(-18px) rotate(8deg)} }
+    @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.months{right:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
+    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none}.cursor{display:none} }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div class="cursor" aria-hidden="true"></div>
+  <header class="nav mono">
+    <a class="brand" href="#top">CAPSTONE<b>●</b></a>
+    <nav class="nav-links" aria-label="Primary navigation"><a href="#overview">Overview</a><a href="#timeline">Timeline</a><a href="#pathways">Pathways</a></nav>
+    <span class="edition">01—07</span>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow mono">Website outline / Everyone</p>
+      <div class="months mono" aria-hidden="true"><span>3</span><span>6</span><span>12</span></div>
+      <h1><span>The</span><span>Next</span><span>Chapter</span></h1>
+      <a class="enter mono" href="#overview"><span>Enter outline</span><i>↓</i></a>
+    </section>
+
+    <div class="ticker mono" aria-hidden="true"><div>EXECUTIVE SUMMARY <b>✦</b> PRESENTATION <b>✦</b> KEY TAKEAWAYS <b>✦</b> ACTION PLAN <b>✦</b> EXECUTIVE SUMMARY <b>✦</b> PRESENTATION <b>✦</b> KEY TAKEAWAYS <b>✦</b> ACTION PLAN <b>✦</b></div></div>
+
+    <section id="overview">
+      <div class="section-label mono">01 / Overview</div>
+      <div class="cards">
+        <article class="card summary reveal"><small class="mono">01</small><span class="arrow">↗</span><h2>Executive<br>Summary</h2></article>
+        <article class="card presentation reveal"><small class="mono">02</small><span class="arrow">↗</span><span class="play">▶</span><h2>Presentation</h2></article>
+        <article class="card takeaway-card reveal"><small class="mono">03</small><span class="count">07</span><h2>Key<br>Takeaways</h2></article>
+      </div>
+    </section>
+
+    <section class="takeaways">
+      <div class="section-label mono">02 / Key takeaways</div>
+      <div id="takeaway-list"></div>
+    </section>
+
+    <section class="timeline" id="timeline">
+      <div class="section-label mono">03 / Action plan</div>
+      <div class="timeline-title reveal"><h2>3—6—12</h2><span class="mono">Months</span></div>
+      <div class="track">
+        <div class="moment"><div class="dot"></div><strong>3</strong><small class="mono">Month</small></div>
+        <div class="moment"><div class="dot"></div><strong>6</strong><small class="mono">Months</small></div>
+        <div class="moment"><div class="dot"></div><strong>12</strong><small class="mono">Months</small></div>
+      </div>
+      <div class="track-footer mono"><span>Approach</span><span>Connect</span><span>Implement</span></div>
+    </section>
+
+    <section class="pathways" id="pathways">
+      <div class="section-label mono">04 / Choose a pathway</div>
+      <div class="path-grid">
+        <a class="path path-one reveal" href="#talent"><small class="mono">01 / Pathway</small><h2>Emerging<br>Talent</h2><span class="path-orb mono">Explore<br>↗</span></a>
+        <a class="path path-two reveal" href="#leaders"><small class="mono">02 / Pathway</small><h2>Business<br>Leaders</h2><span class="path-orb mono">Explore<br>↗</span></a>
+      </div>
+    </section>
+
+    <section class="branch talent" id="talent">
+      <div class="branch-head reveal"><span class="mono">01 / Pathway</span><h2>Emerging Talent</h2></div><div class="branch-list" id="talent-list"></div>
+    </section>
+    <section class="branch leaders" id="leaders">
+      <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div><div class="branch-list" id="leader-list"></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top">CAPSTONE<b>●</b></a><a class="footer-orb" href="#top" aria-label="Back to top">↑</a><p class="mono">Outline / 2026</p></footer>
+
+  <script>
+    const takeaways=["Stability","AI","Flexibility","Self advocacy","Connection","Transparency","Opportunity"];
+    const talent=["Fears + concerns","Resources","Toolkit","Connection + networking"];
+    const leaders=["Emerging talent","Intern management","Team connection","AI as a tool","HR transparency"];
+    const number=n=>String(n+1).padStart(2,"0");
+    document.querySelector("#takeaway-list").innerHTML=takeaways.map((x,i)=>`<div class="takeaway-row reveal"><span class="mono">${number(i)}</span><h3>${x}</h3><i>↗</i></div>`).join("");
+    const rows=items=>items.map((x,i)=>`<div class="branch-row reveal"><span class="mono">${number(i)}</span><h3>${x}</h3><i>+</i></div>`).join("");
+    document.querySelector("#talent-list").innerHTML=rows(talent);
+    document.querySelector("#leader-list").innerHTML=rows(leaders);
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")}),{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+    const cursor=document.querySelector(".cursor");
+    addEventListener("pointermove",e=>{cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px"});
+    document.querySelectorAll("a,.card,.takeaway-row,.branch-row").forEach(el=>{el.addEventListener("mouseenter",()=>{cursor.style.width="46px";cursor.style.height="46px"});el.addEventListener("mouseleave",()=>{cursor.style.width="18px";cursor.style.height="18px"})});
+  </script>
+</body>
+</html>
