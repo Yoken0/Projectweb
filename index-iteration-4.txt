@@ -107,14 +107,14 @@
     .career-labels span:first-child { text-align:left; }.career-labels span:last-child { text-align:right; }
     .career-note { display:block; margin-top:28px; text-align:right; opacity:.7; }
     .footprint-layout { display:grid; grid-template-columns:1fr 230px; gap:36px; }
-    .geo-field { position:relative; min-height:470px; overflow:hidden; border:1px solid #5032911c; border-radius:24px; background-color:#edf2f4; }
-    .map-image { position:absolute; z-index:0; inset:18px 20px 34px 38px; width:calc(100% - 58px); height:calc(100% - 52px); object-fit:fill; opacity:.9; }
+    .geo-field { position:relative; min-height:470px; overflow:hidden; border-radius:24px; background-color:#5032910b; background-image:linear-gradient(#50329114 1px,transparent 1px),linear-gradient(90deg,#50329114 1px,transparent 1px); background-size:12.5% 25%; }
+    .geo-field:before { content:"GLOBAL COVERAGE"; position:absolute; inset:50% auto auto 50%; color:#5032910d; font-size:clamp(54px,9vw,130px); font-weight:900; letter-spacing:-.08em; white-space:nowrap; transform:translate(-50%,-50%); }
     .geo-axis-x { position:absolute; z-index:2; left:48px; right:18px; bottom:11px; display:flex; justify-content:space-between; color:#50329199; font:700 9px/1 "Courier New",monospace; letter-spacing:.06em; }
     .geo-axis-y { position:absolute; z-index:2; left:11px; top:18px; bottom:39px; display:flex; flex-direction:column; justify-content:space-between; color:#50329199; font:700 9px/1 "Courier New",monospace; letter-spacing:.06em; }
-    .equator { position:absolute; z-index:1; left:40px; right:20px; top:50%; height:1px; background:#eb3c9670; }
-    .prime-meridian { position:absolute; z-index:1; top:18px; bottom:32px; left:50%; width:1px; background:#a5cd50a0; }
+    .equator { position:absolute; z-index:1; left:40px; right:0; top:50%; height:1px; background:#eb3c9652; }
+    .prime-meridian { position:absolute; z-index:1; top:0; bottom:32px; left:50%; width:1px; background:#a5cd5080; }
     .equator-label { position:absolute; z-index:2; left:46px; top:calc(50% + 8px); color:var(--pink); font:700 9px/1 "Courier New",monospace; letter-spacing:.08em; text-transform:uppercase; }
-    .place { position:absolute; z-index:3; transform:translate(-50%,-50%); }
+    .place { position:absolute; transform:translate(-50%,-50%); }
     .place i { display:block; width:16px; height:16px; border:4px solid #fff; border-radius:50%; background:var(--pink); box-shadow:0 0 0 1px var(--pink); }
     .place:nth-child(3n) i { background:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
     .place:nth-child(2n) i { background:var(--brown); box-shadow:0 0 0 1px var(--brown); }
@@ -259,10 +259,9 @@
         </article>
 
         <article class="data-card reveal">
-          <div class="chart-head"><div><h3>Global footprint</h3><p>Seven countries represented - highlighted country shapes and markers indicate location, not participant volume</p></div><span class="chart-number mono">04 / 05</span></div>
+          <div class="chart-head"><div><h3>Global footprint</h3><p>Seven countries represented - markers indicate location, not participant volume</p></div><span class="chart-number mono">04 / 05</span></div>
           <div class="footprint-layout">
             <div class="geo-field" role="img" aria-label="Global locations: United States, Germany, China, Australia, Philippines, South Korea, and Scotland">
-              <img class="map-image" src="global-footprint-map.png" alt="" aria-hidden="true">
               <div class="geo-axis-y" aria-hidden="true"><span>60°N</span><span>0°</span><span>60°S</span></div>
               <div class="geo-axis-x" aria-hidden="true"><span>120°W</span><span>0°</span><span>120°E</span></div>
               <div class="equator" aria-hidden="true"></div><div class="prime-meridian" aria-hidden="true"></div><span class="equator-label" aria-hidden="true">Equator</span>

@@ -94,27 +94,21 @@
     .breadth-row:nth-child(even) .bar-fill { background:var(--pink); }
     .visible .bar-fill { transform:scaleX(1); }
     .chart-note { margin:32px 0 0 150px; font-size:13px; font-style:italic; opacity:.66; }
-    .career-scale { position:relative; padding:12px 5% 18px; }
-    .career-endpoints { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; margin-bottom:62px; }
+    .career-scale { position:relative; padding:94px 5% 72px; }
     .career-line { position:relative; height:10px; border-radius:10px; background:linear-gradient(90deg,var(--cyan),var(--pink),var(--brown)); }
     .career-line:before,.career-line:after { content:""; position:absolute; top:50%; width:46px; height:46px; border:12px solid var(--brown); border-radius:50%; background:var(--cream); transform:translateY(-50%); }
     .career-line:before { left:-14px; }.career-line:after { right:-14px; }
-    .career-age { min-width:0; }
-    .career-age strong { display:block; font-size:clamp(25px,3vw,40px); line-height:1.05; }
-    .career-age span { display:block; margin-top:12px; font-size:15px; line-height:1.35; }
-    .career-age.end { text-align:right; }
+    .career-age { position:absolute; top:10px; max-width:230px; }
+    .career-age strong { display:block; font-size:clamp(25px,3vw,40px); line-height:1; }
+    .career-age span { display:block; margin-top:10px; font-size:15px; }
+    .career-age.start { left:5%; }.career-age.end { right:5%; text-align:right; }
     .career-labels { display:grid; grid-template-columns:repeat(3,1fr); margin-top:40px; text-align:center; }
     .career-labels span:first-child { text-align:left; }.career-labels span:last-child { text-align:right; }
-    .career-note { display:block; margin-top:28px; text-align:right; opacity:.7; }
+    .career-note { position:absolute; right:5%; bottom:15px; opacity:.7; }
     .footprint-layout { display:grid; grid-template-columns:1fr 230px; gap:36px; }
-    .geo-field { position:relative; min-height:470px; overflow:hidden; border:1px solid #5032911c; border-radius:24px; background-color:#edf2f4; }
-    .map-image { position:absolute; z-index:0; inset:18px 20px 34px 38px; width:calc(100% - 58px); height:calc(100% - 52px); object-fit:fill; opacity:.9; }
-    .geo-axis-x { position:absolute; z-index:2; left:48px; right:18px; bottom:11px; display:flex; justify-content:space-between; color:#50329199; font:700 9px/1 "Courier New",monospace; letter-spacing:.06em; }
-    .geo-axis-y { position:absolute; z-index:2; left:11px; top:18px; bottom:39px; display:flex; flex-direction:column; justify-content:space-between; color:#50329199; font:700 9px/1 "Courier New",monospace; letter-spacing:.06em; }
-    .equator { position:absolute; z-index:1; left:40px; right:20px; top:50%; height:1px; background:#eb3c9670; }
-    .prime-meridian { position:absolute; z-index:1; top:18px; bottom:32px; left:50%; width:1px; background:#a5cd50a0; }
-    .equator-label { position:absolute; z-index:2; left:46px; top:calc(50% + 8px); color:var(--pink); font:700 9px/1 "Courier New",monospace; letter-spacing:.08em; text-transform:uppercase; }
-    .place { position:absolute; z-index:3; transform:translate(-50%,-50%); }
+    .geo-field { position:relative; min-height:470px; overflow:hidden; border-radius:24px; background-color:#5032910b; background-image:linear-gradient(#50329114 1px,transparent 1px),linear-gradient(90deg,#50329114 1px,transparent 1px); background-size:12.5% 25%; }
+    .geo-field:before { content:"GLOBAL COVERAGE"; position:absolute; inset:50% auto auto 50%; color:#5032910d; font-size:clamp(54px,9vw,130px); font-weight:900; letter-spacing:-.08em; white-space:nowrap; transform:translate(-50%,-50%); }
+    .place { position:absolute; transform:translate(-50%,-50%); }
     .place i { display:block; width:16px; height:16px; border:4px solid #fff; border-radius:50%; background:var(--pink); box-shadow:0 0 0 1px var(--pink); }
     .place:nth-child(3n) i { background:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
     .place:nth-child(2n) i { background:var(--brown); box-shadow:0 0 0 1px var(--brown); }
@@ -181,7 +175,7 @@
     @keyframes grow { from{transform:scaleX(.1)} to{transform:scaleX(1)} }
     @keyframes pulse { to{inset:-25px;opacity:0} }
     @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.months{right:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.geo-field{min-height:420px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
-    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{min-height:360px}.place span{display:none}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
+    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:125px 0 75px}.career-age.start{left:0}.career-age.end{right:0}.career-line:before{left:-2px}.career-line:after{right:-2px}.geo-field{min-height:360px}.place span{display:none}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -248,10 +242,8 @@
         <article class="data-card reveal">
           <div class="chart-head"><div><h3>Career and age span</h3><p>Approximate participant coverage from internship through early professional experience</p></div><span class="chart-number mono">03 / 05</span></div>
           <div class="career-scale">
-            <div class="career-endpoints">
-              <div class="career-age start"><strong>Approx. age 20</strong><span>Rising sophomore intern</span></div>
-              <div class="career-age end"><strong>Approx. age 30</strong><span>Working professional</span></div>
-            </div>
+            <div class="career-age start"><strong>Approx. age 20</strong><span>Rising sophomore intern</span></div>
+            <div class="career-age end"><strong>Approx. age 30</strong><span>Working professional</span></div>
             <div class="career-line"></div>
             <div class="career-labels mono"><span>Intern</span><span>Early career</span><span>Working professional</span></div>
             <span class="career-note">Up to 7 years of experience</span>
@@ -259,13 +251,9 @@
         </article>
 
         <article class="data-card reveal">
-          <div class="chart-head"><div><h3>Global footprint</h3><p>Seven countries represented - highlighted country shapes and markers indicate location, not participant volume</p></div><span class="chart-number mono">04 / 05</span></div>
+          <div class="chart-head"><div><h3>Global footprint</h3><p>Seven countries represented - markers indicate location, not participant volume</p></div><span class="chart-number mono">04 / 05</span></div>
           <div class="footprint-layout">
             <div class="geo-field" role="img" aria-label="Global locations: United States, Germany, China, Australia, Philippines, South Korea, and Scotland">
-              <img class="map-image" src="global-footprint-map.png" alt="" aria-hidden="true">
-              <div class="geo-axis-y" aria-hidden="true"><span>60°N</span><span>0°</span><span>60°S</span></div>
-              <div class="geo-axis-x" aria-hidden="true"><span>120°W</span><span>0°</span><span>120°E</span></div>
-              <div class="equator" aria-hidden="true"></div><div class="prime-meridian" aria-hidden="true"></div><span class="equator-label" aria-hidden="true">Equator</span>
               <div class="place" style="left:22%;top:40%"><i></i><span>United States</span></div>
               <div class="place" style="left:49%;top:31%"><i></i><span>Germany</span></div>
               <div class="place" style="left:45%;top:25%"><i></i><span>Scotland</span></div>
