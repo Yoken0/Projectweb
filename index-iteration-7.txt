@@ -114,14 +114,11 @@
     .equator { position:absolute; z-index:1; left:40px; right:20px; top:50%; height:1px; background:#eb3c9670; }
     .prime-meridian { position:absolute; z-index:1; top:18px; bottom:32px; left:50%; width:1px; background:#a5cd50a0; }
     .equator-label { position:absolute; z-index:2; left:46px; top:calc(50% + 8px); color:var(--pink); font:700 9px/1 "Courier New",monospace; letter-spacing:.08em; text-transform:uppercase; }
-    .place { position:absolute; z-index:3; transform:translate(-50%,-50%); outline:none; }
-    .place:hover,.place:focus,.place:focus-within { z-index:30; }
-    .place i { position:relative; z-index:2; display:block; width:16px; height:16px; border:4px solid #fff; border-radius:50%; background:var(--pink); box-shadow:0 0 0 1px var(--pink); cursor:pointer; transition:transform .2s ease,box-shadow .2s ease; }
-    .place:hover i,.place:focus i { transform:scale(1.35); box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor; }
+    .place { position:absolute; z-index:3; transform:translate(-50%,-50%); }
+    .place i { display:block; width:16px; height:16px; border:4px solid #fff; border-radius:50%; background:var(--pink); box-shadow:0 0 0 1px var(--pink); }
     .place:nth-child(3n) i { background:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
     .place:nth-child(2n) i { background:var(--brown); box-shadow:0 0 0 1px var(--brown); }
-    .place span { position:absolute; z-index:1; left:20px; top:-4px; padding:5px 8px; pointer-events:none; white-space:nowrap; color:var(--brown); background:#fff; border:1px solid #50329120; font:700 10px/1 "Courier New",monospace; letter-spacing:.05em; text-transform:uppercase; transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
-    .place:hover span,.place:focus span { z-index:31; border-color:var(--pink); box-shadow:0 10px 24px #5032912b; transform:translateY(-3px); }
+    .place span { position:absolute; left:20px; top:-4px; padding:5px 8px; white-space:nowrap; color:var(--brown); background:#fff; border:1px solid #50329120; font:700 10px/1 "Courier New",monospace; letter-spacing:.05em; text-transform:uppercase; }
     .country-list { display:grid; align-content:start; gap:18px; }
     .country-list h4 { margin:0 0 8px; font-size:16px; }
     .country-list div { display:grid; grid-template-columns:12px 1fr; gap:12px; align-items:center; font-size:14px; }
@@ -184,7 +181,7 @@
     @keyframes grow { from{transform:scaleX(.1)} to{transform:scaleX(1)} }
     @keyframes pulse { to{inset:-25px;opacity:0} }
     @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.months{right:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
-    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
+    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -269,13 +266,13 @@
               <div class="geo-axis-y" aria-hidden="true"><span>60°N</span><span>0°</span><span>60°S</span></div>
               <div class="geo-axis-x" aria-hidden="true"><span>120°W</span><span>0°</span><span>120°E</span></div>
               <div class="equator" aria-hidden="true"></div><div class="prime-meridian" aria-hidden="true"></div><span class="equator-label" aria-hidden="true">Equator</span>
-              <div class="place" style="left:23.1%;top:28.7%" tabindex="0" aria-label="United States"><i></i><span>United States</span></div>
-              <div class="place" style="left:53.1%;top:26%" tabindex="0" aria-label="Germany"><i></i><span>Germany</span></div>
-              <div class="place" style="left:50%;top:24.8%" tabindex="0" aria-label="Scotland"><i></i><span>Scotland</span></div>
-              <div class="place" style="left:76.1%;top:32.8%" tabindex="0" aria-label="China"><i></i><span>China</span></div>
-              <div class="place" style="left:82.1%;top:32.9%" tabindex="0" aria-label="South Korea"><i></i><span>South Korea</span></div>
-              <div class="place" style="left:80.8%;top:43.8%" tabindex="0" aria-label="Philippines"><i></i><span>Philippines</span></div>
-              <div class="place" style="left:83.7%;top:61.8%" tabindex="0" aria-label="Australia"><i></i><span>Australia</span></div>
+              <div class="place" style="left:23.1%;top:28.7%"><i></i><span>United States</span></div>
+              <div class="place" style="left:53.1%;top:26%"><i></i><span>Germany</span></div>
+              <div class="place" style="left:50%;top:24.8%"><i></i><span>Scotland</span></div>
+              <div class="place" style="left:76.1%;top:32.8%"><i></i><span>China</span></div>
+              <div class="place" style="left:82.1%;top:32.9%"><i></i><span>South Korea</span></div>
+              <div class="place" style="left:80.8%;top:43.8%"><i></i><span>Philippines</span></div>
+              <div class="place" style="left:83.7%;top:61.8%"><i></i><span>Australia</span></div>
             </div>
             <div class="country-list"><h4 class="mono">Countries</h4><div><i></i><span>United States</span></div><div><i></i><span>Germany</span></div><div><i></i><span>China</span></div><div><i></i><span>Australia</span></div><div><i></i><span>Philippines</span></div><div><i></i><span>South Korea</span></div><div><i></i><span>Scotland (UK)</span></div></div>
           </div>
