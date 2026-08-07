@@ -193,7 +193,7 @@
 <body>
   <header class="nav mono">
     <a class="brand" href="#top">CAPSTONE<b>●</b></a>
-    <nav class="nav-links" aria-label="Primary navigation"><a href="#overview">Overview</a><a href="#pathways">Pathways</a><a href="#data">Data</a></nav>
+    <nav class="nav-links" aria-label="Primary navigation"><a href="#overview">Overview</a><a href="#data">Data</a><a href="#pathways">Pathways</a></nav>
     <span class="edition">01—07</span>
   </header>
 
@@ -214,22 +214,8 @@
       </div>
     </section>
 
-    <section class="pathways" id="pathways">
-      <div class="section-label mono">02 / Choose a pathway</div>
-      <div class="path-grid">
-        <a class="path path-one reveal" href="#talent"><small class="mono">01 / Pathway</small><h2>Emerging<br>Talent</h2><span class="path-orb mono">Explore<br>↗</span></a>
-        <a class="path path-two reveal" href="#leaders"><small class="mono">02 / Pathway</small><h2>Business<br>Leaders</h2><span class="path-orb mono">Explore<br>↗</span></a>
-      </div>
-    </section>
-
-    <section class="branch talent" id="talent">
-      <div class="branch-head reveal"><span class="mono">01 / Pathway</span><h2>Emerging Talent</h2></div><div class="branch-list" id="talent-list"></div>
-    </section>
-    <section class="branch leaders" id="leaders">
-      <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div><div class="branch-list" id="leader-list"></div>
-    </section>
     <section class="data-dashboard" id="data">
-      <div class="section-label mono">03 / Focus group coverage</div>
+      <div class="section-label mono">02 / Focus group coverage</div>
       <div class="data-heading reveal">
         <h2>Research<br>at a glance</h2>
         <p>Focus group demographic coverage across participation, geography, career stage, teams, and roles.</p>
@@ -300,6 +286,20 @@
       </div>
     </section>
 
+    <section class="pathways" id="pathways">
+      <div class="section-label mono">03 / Choose a pathway</div>
+      <div class="path-grid">
+        <a class="path path-one reveal" href="#talent"><small class="mono">01 / Pathway</small><h2>Emerging<br>Talent</h2><span class="path-orb mono">Explore<br>↗</span></a>
+        <a class="path path-two reveal" href="#leaders"><small class="mono">02 / Pathway</small><h2>Business<br>Leaders</h2><span class="path-orb mono">Explore<br>↗</span></a>
+      </div>
+    </section>
+
+    <section class="branch talent" id="talent">
+      <div class="branch-head reveal"><span class="mono">01 / Pathway</span><h2>Emerging Talent</h2></div><div class="branch-list" id="talent-list"></div>
+    </section>
+    <section class="branch leaders" id="leaders">
+      <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div><div class="branch-list" id="leader-list"></div>
+    </section>
   </main>
 
   <footer><a class="brand" href="#top">CAPSTONE<b>●</b></a><a class="footer-orb" href="#top" aria-label="Back to top">↑</a><p class="mono">Outline / 2026</p></footer>
