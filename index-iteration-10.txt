@@ -15,9 +15,10 @@
     .nav { position:absolute; z-index:10; inset:0 0 auto; height:78px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 3vw; color:var(--cream); border-bottom:1px solid #f6f0e84d; }
     .brand { font-size:17px; font-weight:900; letter-spacing:-.04em; }
     .brand b { color:var(--pink); }
-    .nav-links { display:flex; gap:12px; }
-    .nav-links a { padding:12px 20px; border:1px solid #f8f7f359; border-radius:999px; font-size:13px; transition:color .25s ease,background .25s ease,border-color .25s ease,transform .25s ease; }
-    .nav-links a:hover,.nav-links a:focus-visible { color:var(--brown); background:var(--cyan); border-color:var(--cyan); outline:none; transform:translateY(-2px); }
+    .nav-links { display:flex; gap:34px; }
+    .nav-links a { position:relative; }
+    .nav-links a:after { content:""; position:absolute; left:0; right:0; bottom:-8px; height:2px; background:var(--cyan); transform:scaleX(0); transform-origin:right; transition:.35s; }
+    .nav-links a:hover:after { transform:scaleX(1); transform-origin:left; }
     .nav .edition { justify-self:end; }
     .hero { position:relative; min-height:92svh; display:flex; flex-direction:column; justify-content:flex-end; padding:120px 3vw 8vh; color:var(--cream); background:var(--brown); isolation:isolate; overflow:hidden; }
     .hero:before { content:""; position:absolute; z-index:-2; width:48vw; aspect-ratio:1; right:-8vw; top:-15vw; border-radius:50%; background:var(--pink); opacity:.15; }
@@ -30,6 +31,8 @@
     .enter { position:absolute; right:3vw; bottom:5.5vh; display:flex; align-items:center; gap:16px; }
     .enter i { width:48px; height:48px; display:grid; place-items:center; border:1px solid #f8f7f380; border-radius:50%; font:normal 20px/1 Arial; transition:background .25s,color .25s; }
     .enter:hover i { color:var(--brown); background:var(--cyan); }
+    .months { position:absolute; right:4vw; top:16vh; display:flex; gap:8px; }
+    .months span { width:40px; height:40px; display:grid; place-items:center; border:1px solid #f6f0e866; border-radius:50%; }
     .ticker { height:52px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; background:var(--cyan); color:var(--brown); }
     .ticker div { font-size:12px; animation:ticker 42s linear infinite; }
     .ticker b { padding:0 24px; color:var(--pink); }
@@ -182,8 +185,8 @@
     @keyframes ticker { to{transform:translateX(-50%)} }
     @keyframes grow { from{transform:scaleX(.1)} to{transform:scaleX(1)} }
     @keyframes pulse { to{inset:-25px;opacity:0} }
-    @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
-    @media(max-width:520px){ .hero h1{font-size:19vw}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
+    @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.months{right:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
+    @media(max-width:520px){ .hero h1{font-size:19vw}.months span{width:32px;height:32px}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -197,6 +200,7 @@
   <main>
     <section class="hero" id="top">
       <p class="eyebrow mono">Website outline / Everyone</p>
+      <div class="months mono" aria-hidden="true"><span>3</span><span>6</span><span>12</span></div>
       <h1><span>The</span><span>Next</span><span>Chapter</span></h1>
       <a class="enter mono" href="#overview"><span>Enter outline</span><i>↓</i></a>
     </section>
