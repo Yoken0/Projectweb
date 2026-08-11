@@ -8,7 +8,7 @@
   <style>
     :root { --brown:#503291; --pink:#EB3C96; --cyan:#A5CD50; --cream:#f8f7f3; }
     * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; scrollbar-gutter:stable; }
     body { margin:0; background:var(--cream); color:var(--brown); font-family:Arial,Helvetica,sans-serif; overflow-x:hidden; }
     a { color:inherit; text-decoration:none; }
     .mono { font:700 11px/1 "Courier New",monospace; letter-spacing:.12em; text-transform:uppercase; }
@@ -166,12 +166,42 @@
     .branch-head h2 { margin:55px 0 0; font-size:clamp(58px,7.5vw,118px); line-height:.82; letter-spacing:-.075em; text-transform:uppercase; }
     .talent { background:var(--cyan); }
     .leaders { color:var(--brown); background:var(--cream); }
-    .branch-list { border-top:1px solid currentColor; }
-    .branch-row { display:grid; grid-template-columns:52px 1fr auto; align-items:center; min-height:120px; border-bottom:1px solid currentColor; transition:.35s; }
-    .branch-row:hover { padding:0 16px; color:var(--cream); background:var(--pink); }
-    .branch-row h3 { margin:0; font-size:clamp(27px,3vw,48px); line-height:1; letter-spacing:-.055em; text-transform:uppercase; }
-    .branch-row i { font:normal 30px/1 Arial; transition:.35s; }
-    .branch-row:hover i { transform:rotate(45deg); }
+    .branch-content { min-width:0; }
+    .branch-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .topic-slot { min-width:0; height:330px; }
+    .topic-flip { position:relative; display:block; width:100%; height:100%; color:inherit; transition:transform .25s ease,box-shadow .25s ease; }
+    .topic-inner { position:relative; display:block; width:100%; height:100%; }
+    .topic-flip:hover:not(.is-flipped) { transform:translateY(-4px); box-shadow:0 18px 36px #50329122; }
+    .topic-open { width:100%; height:100%; color:inherit; background:transparent; font:inherit; text-align:left; cursor:pointer; }
+    .topic-open:focus-visible,.topic-close:focus-visible,.topic-link:focus-visible { outline:3px solid var(--pink); outline-offset:3px; }
+    .topic-face { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-between; padding:24px; overflow:hidden; border:1px solid currentColor; transition:opacity .2s ease,visibility 0s .2s; }
+    .topic-front { visibility:visible; opacity:1; background:#ffffff9c; }
+    .topic-front:after { content:""; position:absolute; width:170px; height:170px; right:-70px; bottom:-80px; border:1px solid currentColor; border-radius:50%; opacity:.3; }
+    .topic-title { position:relative; z-index:1; display:block; margin:auto 0 0; font-size:clamp(27px,3vw,48px); font-weight:700; line-height:.92; letter-spacing:-.055em; text-transform:uppercase; }
+    .topic-number { font:700 11px/1 "Courier New",monospace; letter-spacing:.12em; }
+    .flip-cue { position:absolute; z-index:2; top:20px; right:20px; width:42px; height:42px; display:grid; place-items:center; border:1px solid currentColor; border-radius:50%; font-size:20px; }
+    .topic-close { padding:0; color:inherit; background:transparent; font:inherit; cursor:pointer; }
+    .topic-back { visibility:hidden; opacity:0; color:var(--cream); background:var(--brown); border-color:var(--brown); }
+    .topic-flip.is-flipped .topic-front { visibility:hidden; opacity:0; pointer-events:none; transition-delay:0s; }
+    .topic-flip.is-flipped .topic-back { visibility:visible; opacity:1; transition:opacity .24s ease .1s,visibility 0s .1s; }
+    .topic-back .topic-label { color:var(--cyan); }
+    .topic-back h4 { margin:18px 0 12px; font-size:24px; line-height:1; letter-spacing:-.04em; text-transform:uppercase; }
+    .topic-back p { margin:0; font-size:14px; line-height:1.48; }
+    .topic-details { display:grid; gap:8px; margin:16px 0; font-size:14px; line-height:1.38; }
+    .topic-detail { position:relative; padding-left:17px; }
+    .topic-detail:before { content:""; position:absolute; top:.56em; left:0; width:6px; height:6px; border-radius:50%; background:var(--cyan); }
+    .topic-links { display:flex; flex-wrap:wrap; gap:7px; margin:4px 0 14px; }
+    .topic-link { padding:8px 10px; color:var(--cream); background:#ffffff12; border:1px solid #f8f7f366; border-radius:999px; font:700 9px/1.2 "Courier New",monospace; letter-spacing:.05em; text-transform:uppercase; transition:color .2s ease,background .2s ease,border-color .2s ease; }
+    .topic-link:hover,.topic-link:focus-visible { color:var(--brown); background:var(--cyan); border-color:var(--cyan); }
+    .topic-link:after { content:" ↗"; }
+    .topic-takeaway { margin-top:auto!important; padding-top:16px; border-top:1px solid #f8f7f34d; font-weight:700; }
+    .topic-backdrop { position:fixed; z-index:999; inset:0; width:100%; height:100%; padding:0; border:0; background:#241643b8; backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); cursor:zoom-out; animation:backdropIn .3s ease both; }
+    .topic-backdrop[hidden] { display:none; }
+    body.has-open-card { overflow:hidden; }
+    .topic-flip.is-flipped { position:fixed; z-index:1000; top:50%; left:50%; width:min(640px,calc(100vw - 56px)); height:min(640px,calc(100dvh - 56px)); transform:translate(-50%,-50%); box-shadow:0 34px 90px #1c102e73; cursor:zoom-out; animation:cardPop .38s cubic-bezier(.16,.8,.25,1) both; }
+    .topic-flip.is-flipped .topic-face { padding:clamp(26px,3vw,42px); }
+    .topic-flip.is-flipped .topic-back h4 { padding-right:50px; font-size:clamp(30px,3.3vw,44px); }
+    .topic-flip.is-flipped .topic-back p { font-size:clamp(14px,1.25vw,17px); line-height:1.55; }
     footer { min-height:420px; padding:34px 3vw; display:grid; grid-template-columns:1fr auto 1fr; align-items:end; color:var(--cream); background:var(--brown); }
     footer p { justify-self:end; margin:0; }
     .footer-orb { width:150px; height:150px; display:grid; place-items:center; border:1px solid #f8f7f34d; border-radius:50%; font-size:40px; transition:background .3s,color .3s; }
@@ -182,8 +212,11 @@
     @keyframes ticker { to{transform:translateX(-50%)} }
     @keyframes grow { from{transform:scaleX(.1)} to{transform:scaleX(1)} }
     @keyframes pulse { to{inset:-25px;opacity:0} }
+    @keyframes backdropIn { from{opacity:0} to{opacity:1} }
+    @keyframes cardPop { from{opacity:.25;transform:translate(-50%,-50%) scale(.82)} to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
+    @media(max-height:720px) and (min-width:521px){.topic-flip.is-flipped{width:min(580px,calc(100vw - 40px));height:min(570px,calc(100dvh - 36px))}.topic-flip.is-flipped .topic-face{padding:24px 28px}.topic-flip.is-flipped .topic-back h4{margin:10px 0 8px;font-size:29px}.topic-flip.is-flipped .topic-back p{font-size:13px;line-height:1.38}.topic-flip.is-flipped .topic-details{gap:4px;margin:8px 0;font-size:12px;line-height:1.3}.topic-flip.is-flipped .topic-links{gap:5px;margin:2px 0 9px}.topic-flip.is-flipped .topic-link{padding:6px 8px;font-size:8px}.topic-flip.is-flipped .topic-takeaway{padding-top:8px}}
     @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
-    @media(max-width:520px){ .hero h1{font-size:19vw}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}.branch-row{grid-template-columns:38px 1fr auto;min-height:96px}.branch-row h3{font-size:7vw}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
+    @media(max-width:520px){ .hero h1{font-size:19vw}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.topic-slot{height:310px}.branch-list{grid-template-columns:1fr}.topic-face{padding:20px}.topic-title{font-size:34px}.topic-flip.is-flipped{width:calc(100vw - 28px);height:min(620px,calc(100dvh - 28px))}.topic-flip.is-flipped .topic-face{padding:22px}.topic-flip.is-flipped .topic-back h4{margin:10px 0 7px;padding-right:42px;font-size:26px}.topic-flip.is-flipped .topic-back p{font-size:13px;line-height:1.36}.topic-flip.is-flipped .topic-details{gap:4px;margin:7px 0;font-size:12px;line-height:1.28}.topic-flip.is-flipped .topic-links{gap:5px;margin:2px 0 8px}.topic-flip.is-flipped .topic-link{padding:6px 8px;font-size:8px}.topic-flip.is-flipped .topic-takeaway{padding-top:8px}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -219,10 +252,12 @@
     </section>
 
     <section class="branch talent" id="talent">
-      <div class="branch-head reveal"><span class="mono">01 / Pathway</span><h2>Emerging Talent</h2></div><div class="branch-list" id="talent-list"></div>
+      <div class="branch-head reveal"><span class="mono">01 / Pathway</span><h2>Emerging Talent</h2></div>
+      <div class="branch-content"><div class="branch-list" id="talent-list"></div></div>
     </section>
     <section class="branch leaders" id="leaders">
-      <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div><div class="branch-list" id="leader-list"></div>
+      <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div>
+      <div class="branch-content"><div class="branch-list" id="leader-list"></div></div>
     </section>
     <section class="data-dashboard" id="data">
       <div class="section-label mono">03 / Focus group coverage</div>
@@ -298,16 +333,74 @@
 
   </main>
 
+  <button class="topic-backdrop" id="topic-backdrop" type="button" aria-label="Close open card" hidden></button>
+
   <footer><a class="brand" href="#top">CAPSTONE<b>●</b></a><a class="footer-orb" href="#top" aria-label="Back to top">↑</a><p class="mono">Outline / 2026</p></footer>
 
   <script>
-    const talent=["Fears + concerns","Resources","Toolkit","Connection + networking"];
-    const leaders=["Emerging talent","Intern management","Team connection","AI as a tool","HR transparency"];
+    const talent=[
+      {title:"Navigating uncertainty",label:"Starting well",body:"Starting a new role can feel overwhelming. It is normal not to have every answer. Asking thoughtful questions, confirming priorities, and communicating mistakes early are part of learning and professional growth.",details:["Write down questions and bring them to a manager, mentor, buddy, or teammate.","Clarify deadlines, responsibilities, and what successful work looks like.","Build confidence through peers and employee networks instead of comparing starting points."],takeaway:"Ask early, take responsibility, and apply what you learn.",links:[]},
+      {title:"Workplace resources",label:"Know where to look",body:"Use company policy as the first source for dress, conduct, office etiquette, and professional courtesy. Trusted examples can then help translate those standards into everyday choices.",details:["Check the employee handbook before relying on general advice.","Match attire to the role, location, safety requirements, and event.","For email, use a clear subject, appropriate tone, concise structure, and careful use of Reply All, Cc, Bcc, and attachments."],takeaway:"Start with policy, then use trusted examples to fill practical gaps.",links:[{label:"Harvard attire guide",url:"https://careerservices.fas.harvard.edu/resources/mcs-professional-attire-guide/"}]},
+      {title:"Communication toolkit",label:"Practical habits",body:"Strong workplace communication makes the purpose, next step, owner, and timing easy to understand. Choose email, chat, or a meeting based on urgency and complexity.",details:["Put the most important information and action request first.","Use To for people expected to act and Cc for people who only need visibility.","Use templates for feedback, clarification, meetings, delays, thanks, and introductions."],takeaway:"Keep communication clear, concise, and actionable.",links:[{label:"Microsoft email guide",url:"https://support.microsoft.com/en-us/outlook/outlook-best-practices-write-great-email"}]},
+      {title:"Connection + networking",label:"Build relationships",body:"Networking is relationship-building, not simply asking for opportunities. Prepare a clear purpose, thoughtful questions, and a respectful follow-up.",details:["Use informational interviews and career conversations to learn.","Connect with peers, mentors, sponsors, alumni, and internal contacts.","Send thanks, note what you learned, and maintain the relationship."],takeaway:"Prepare, connect with purpose, and follow up.",links:[]}
+    ];
+    const leaders=[
+      {title:"Emerging talent",label:"Develop early careers",body:"Structured paths can align what new hires want with what the business needs while strengthening engagement and retention.",details:["Combine hands-on learning, mentorship, rotations, and high-impact projects.","Make career ladders and advancement expectations visible.","Track progress with clear outcomes and concrete metrics."],takeaway:"Design programs around measurable growth and meaningful experience.",links:[{label:"HBR emerging talent",url:"https://hbr.org/2024/05/emerging-talent"},{label:"McKinsey talent trends",url:"https://www.mckinsey.com/business-functions/organization/our-insights/global-talent-trends"}]},
+      {title:"Intern management",label:"Build the pipeline",body:"Internships are most effective when meaningful work is paired with consistent support and a visible path forward.",details:["Provide structured onboarding, mentorship, and regular feedback.","Use transparent evaluation criteria and defined success measures.","Connect strong performance to clear full-time opportunities."],takeaway:"Treat internships as a disciplined, measurable talent pipeline.",links:[{label:"LinkedIn internships",url:"https://careers.linkedin.com/pathways-programs/internships"},{label:"Deloitte best practices",url:"https://www2.deloitte.com/us/en/pages/human-capital/articles/internship-program-best-practices.html"}]},
+      {title:"Team connection",label:"Create strong norms",body:"High-performing teams depend on psychological safety, clearly defined roles, and regular constructive feedback.",details:["Create repeatable routines for hybrid and remote collaboration.","Clarify decision rights, responsibilities, and communication norms.","Make it safe to raise questions, concerns, and new ideas."],takeaway:"Build team rituals that reduce friction across roles and locations.",links:[{label:"Gallup engagement",url:"https://www.gallup.com/workplace/236441/employee-engagement.aspx"},{label:"MIT Sloan team dynamics",url:"https://mitsloan.mit.edu/ideas-made-to-matter/teams-dynamics"}]},
+      {title:"AI as a tool",label:"Augment judgment",body:"AI can automate repetitive work and accelerate insight, while people retain responsibility for critical decisions.",details:["Use human review for consequential or high-risk outputs.","Set clear standards for data quality, governance, ethics, and privacy.","Measure business value, consistency, and risk before scaling."],takeaway:"Pair AI with human oversight, governance, and success metrics.",links:[{label:"McKinsey AI opportunity",url:"https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/ai-s-once-in-a-century-opportunity"},{label:"PwC AI workplace",url:"https://www.pwc.com/gx/en/issues/analytics/assets/pwc-ai-in-workplace.pdf"}]},
+      {title:"HR transparency",label:"Build trust",body:"Clear people-data policies and consistent explanations can improve trust, fairness, and accountability.",details:["Explain how employee data is collected, used, and protected.","Publish decision criteria for promotions, workload, and skill development.","Apply explanations consistently and support them with governance."],takeaway:"Make policies and decision criteria clear, consistent, and accountable.",links:[{label:"SHRM transparency",url:"https://www.shrm.org/resourcesandtools/hr-topics/employee-relations/pages/employee-transparency.aspx"},{label:"Deloitte people analytics",url:"https://www2.deloitte.com/us/en/pages/human-capital/articles/people-analytics-hr-transformation.html"}]}
+    ];
     const number=n=>String(n+1).padStart(2,"0");
     document.querySelector("#people-dots").innerHTML=Array.from({length:35},()=>"<i></i>").join("");
-    const rows=items=>items.map((x,i)=>`<div class="branch-row reveal"><span class="mono">${number(i)}</span><h3>${x}</h3><i>+</i></div>`).join("");
-    document.querySelector("#talent-list").innerHTML=rows(talent);
-    document.querySelector("#leader-list").innerHTML=rows(leaders);
+    const rows=(items,prefix)=>items.map((item,i)=>{
+      const cardId=`${prefix}-topic-${i+1}`;
+      const links=item.links.length?`<span class="topic-links" aria-label="Related sources">${item.links.map(link=>`<a class="topic-link" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`).join("")}</span>`:"";
+      return `<div class="topic-slot reveal"><article class="topic-flip" aria-labelledby="${cardId}-title"><button class="topic-face topic-front topic-open" type="button" aria-expanded="false" aria-controls="${cardId}-details" aria-label="Open ${item.title} details"><span class="topic-number">${number(i)}</span><span class="flip-cue" aria-hidden="true">↗</span><span class="topic-title">${item.title}</span></button><div class="topic-face topic-back" id="${cardId}-details"><span class="topic-label mono">${item.label}</span><button class="flip-cue topic-close" type="button" aria-label="Close ${item.title} details">×</button><h4 id="${cardId}-title">${item.title}</h4><p>${item.body}</p><span class="topic-details">${item.details.map(detail=>`<span class="topic-detail">${detail}</span>`).join("")}</span>${links}<p class="topic-takeaway">${item.takeaway}</p></div></article></div>`;
+    }).join("");
+    document.querySelector("#talent-list").innerHTML=rows(talent,"talent");
+    document.querySelector("#leader-list").innerHTML=rows(leaders,"leader");
+    const backdrop=document.querySelector("#topic-backdrop");
+    let openCard=null;
+    const closeCard=()=>{
+      if(!openCard)return;
+      const card=openCard;
+      const openButton=card.querySelector(".topic-open");
+      openCard=null;
+      card.classList.remove("is-flipped");
+      card.removeAttribute("role");
+      card.removeAttribute("aria-modal");
+      openButton.setAttribute("aria-expanded","false");
+      document.body.classList.remove("has-open-card");
+      backdrop.hidden=true;
+      openButton.focus({preventScroll:true});
+    };
+    document.querySelectorAll(".topic-flip").forEach(card=>{
+      const openButton=card.querySelector(".topic-open");
+      const closeButton=card.querySelector(".topic-close");
+      openButton.addEventListener("click",()=>{
+        openCard=card;
+        card.classList.add("is-flipped");
+        card.setAttribute("role","dialog");
+        card.setAttribute("aria-modal","true");
+        openButton.setAttribute("aria-expanded","true");
+        document.body.classList.add("has-open-card");
+        backdrop.hidden=false;
+        requestAnimationFrame(()=>closeButton.focus({preventScroll:true}));
+      });
+      closeButton.addEventListener("click",closeCard);
+    });
+    backdrop.addEventListener("click",closeCard);
+    document.addEventListener("keydown",event=>{
+      if(event.key==="Escape")closeCard();
+      if(event.key==="Tab"&&openCard){
+        const focusable=[...openCard.querySelectorAll("button,a[href]")].filter(element=>getComputedStyle(element).visibility!=="hidden");
+        const first=focusable[0];
+        const last=focusable[focusable.length-1];
+        if(event.shiftKey&&(document.activeElement===first||!openCard.contains(document.activeElement))){event.preventDefault();last.focus()}
+        else if(!event.shiftKey&&(document.activeElement===last||!openCard.contains(document.activeElement))){event.preventDefault();first.focus()}
+      }
+    });
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")}),{threshold:.12});
     document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   </script>
