@@ -1,0 +1,27 @@
+Good [morning/afternoon], everyone.
+
+This website is called “The Next Chapter.” It was created as an interactive companion to our capstone presentation, giving viewers a clear and engaging way to explore our research and recommendations.
+
+[Show the homepage.]
+
+The opening screen introduces the project and establishes the main visual identity of the website. From here, visitors can move directly into the presentation or explore the two pathways we developed: Emerging Talent and Business Leaders.
+
+[Scroll to “Choose a Pathway.”]
+
+The first pathway focuses on emerging talent. This section addresses four areas that can help people feel more confident when beginning or developing their careers.
+
+[Open “Navigating Uncertainty.”]
+
+The first topic is navigating uncertainty. Starting a new role can feel overwhelming, and people may not always know when to ask questions or how to respond to mistakes. This card provides practical guidance, such as clarifying expectations, communicating early, and connecting with managers, mentors, or teammates.
+
+[Open “Workplace Resources.”]
+
+The next topic helps users identify reliable workplace resources. It encourages them to begin with company policies and then use trusted external guidance for areas such as professional attire, workplace etiquette, and communication.
+
+[Open “Communication Toolkit.”]
+
+The communication toolkit provides actionable advice for email, meetings, feedback, follow-ups, and professional introductions. It emphasizes making the purpose, next step, owner, and timing of a message easy to understand.
+
+[Open “Connection and Networking.”]
+
+The final emerging-talent topic focuses on building professional relationships. It explains that networking is not simply asking for opportunities. It involves preparing thoughtful questions, learning from others, following up, and maintaining relationships over time.
