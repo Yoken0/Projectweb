@@ -82,6 +82,28 @@
     .takeaway-row h3 { margin:0; font-size:clamp(34px,5.2vw,78px); line-height:1; letter-spacing:-.06em; text-transform:uppercase; }
     .takeaway-row i { font:normal 28px/1 Arial; transition:.35s; }
     .takeaway-row:hover i { transform:rotate(45deg); }
+    .roadmap-section { position:relative; padding:34px 3vw 10vw; color:var(--cream); background:var(--brown); overflow:hidden; }
+    .roadmap-section:after { content:""; position:absolute; width:min(44vw,620px); aspect-ratio:1; right:-17%; top:-36%; border:1px solid #f8f7f33d; border-radius:50%; box-shadow:0 0 0 7vw #a5cd500d; pointer-events:none; }
+    .roadmap-section .section-label { position:relative; z-index:1; border-color:#f8f7f34d; }
+    .roadmap-heading { position:relative; z-index:1; display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin:12px 0 clamp(60px,8vw,110px); }
+    .roadmap-heading h2 { margin:0; font-size:clamp(90px,17vw,250px); line-height:.72; letter-spacing:-.095em; }
+    .roadmap-heading p { max-width:370px; margin:0 0 8px; color:#f8f7f3c2; font-size:17px; line-height:1.55; }
+    .roadmap-grid { position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:0; padding:0; border-top:1px solid #f8f7f34d; border-bottom:1px solid #f8f7f34d; list-style:none; }
+    .roadmap-step { position:relative; min-height:430px; padding:32px; display:flex; flex-direction:column; border-right:1px solid #f8f7f34d; overflow:hidden; }
+    .roadmap-step:last-child { border-right:0; }
+    .roadmap-step:before { content:""; position:absolute; width:180px; height:180px; top:-105px; right:-85px; border:1px solid currentColor; border-radius:50%; opacity:.2; }
+    .roadmap-step:nth-child(2) { background:#ffffff08; }
+    .roadmap-step:nth-child(3) { background:#eb3c961c; }
+    .roadmap-month { display:flex; align-items:flex-end; gap:12px; }
+    .roadmap-month strong { color:var(--cyan); font-size:clamp(76px,8vw,124px); line-height:.78; letter-spacing:-.08em; }
+    .roadmap-step:nth-child(2) .roadmap-month strong { color:var(--pink); }
+    .roadmap-step:nth-child(3) .roadmap-month strong { color:var(--cream); }
+    .roadmap-month span { margin-bottom:8px; font:700 10px/1 "Courier New",monospace; letter-spacing:.12em; text-transform:uppercase; }
+    .roadmap-copy { margin-top:auto; padding-top:44px; }
+    .roadmap-copy h3 { max-width:430px; margin:0; font-size:clamp(27px,2.6vw,42px); line-height:1.02; letter-spacing:-.045em; }
+    .roadmap-actions { display:grid; gap:10px; margin:24px 0 0; padding:20px 0 0; border-top:1px solid #f8f7f33d; list-style:none; }
+    .roadmap-actions li { position:relative; padding-left:18px; font-size:15px; line-height:1.4; }
+    .roadmap-actions li:before { content:""; position:absolute; top:.48em; left:0; width:7px; height:7px; border-radius:50%; background:var(--cyan); }
     .data-dashboard { padding-top:34px; background:#fff; }
     .data-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin:8px 0 48px; }
     .data-heading h2 { max-width:780px; margin:0; font-size:clamp(54px,8vw,122px); line-height:.84; letter-spacing:-.075em; text-transform:uppercase; }
@@ -244,7 +266,7 @@
     @keyframes loginShake { 25%{transform:translateX(-7px)} 50%{transform:translateX(6px)} 75%{transform:translateX(-3px)} }
     @media(max-width:600px){.login-gate{padding:16px}.login-panel{padding:28px 22px}.login-brand{margin-bottom:70px}.login-title{font-size:15vw}.login-copy{margin:22px 0 28px;font-size:14px}.login-field{grid-template-columns:1fr}.login-submit{justify-content:space-between}}
     @media(max-height:720px) and (min-width:521px){.topic-flip.is-flipped{width:min(580px,calc(100vw - 40px));height:min(570px,calc(100dvh - 36px))}.topic-flip.is-flipped .topic-face{padding:24px 28px}.topic-flip.is-flipped .topic-back h4{margin:10px 0 8px;font-size:30px}.topic-flip.is-flipped .topic-back p{font-size:15px;line-height:1.38}.topic-flip.is-flipped .topic-details{gap:6px;margin:10px 0;font-size:14px;line-height:1.34}.topic-flip.is-flipped .topic-links{gap:5px;margin:2px 0 9px}.topic-flip.is-flipped .topic-link{padding:7px 9px;font-size:9px}.topic-flip.is-flipped .topic-takeaway{padding-top:9px;font-size:16px}}
-    @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
+    @media(max-width:850px){ .nav{grid-template-columns:1fr 1fr;padding:0 20px}.nav-links{display:none}.hero{padding:120px 20px 5vh}.hero h1{font-size:20vw}.hero h1 span:nth-child(2){margin-left:7vw}.hero .eyebrow{left:20px}.enter{right:20px}.enter span{display:none}section{padding-left:20px;padding-right:20px}.cards,.path-grid{grid-template-columns:1fr}.card{min-height:410px}.roadmap-section{padding-left:20px;padding-right:20px}.roadmap-heading{align-items:flex-start;flex-direction:column}.roadmap-heading h2{font-size:23vw}.roadmap-grid{grid-template-columns:1fr}.roadmap-step{min-height:300px;border-right:0;border-bottom:1px solid #f8f7f34d}.roadmap-step:last-child{border-bottom:0}.roadmap-copy{padding-top:50px}.roadmap-copy h3{font-size:clamp(30px,6vw,46px)}.data-heading,.chart-head{align-items:flex-start;flex-direction:column}.study-grid,.footprint-layout,.perspective-grid{grid-template-columns:1fr}.study-metrics{margin-top:20px}.country-list{grid-template-columns:repeat(2,1fr)}.branch{grid-template-columns:1fr;gap:80px;padding:90px 20px}.branch-head{position:static}.path{min-height:58vh} }
     @media(max-width:520px){ .hero h1{font-size:19vw}.card{min-height:340px}.takeaway-row{grid-template-columns:42px 1fr auto;min-height:82px}.takeaway-row h3{font-size:9.5vw}.data-card{padding:22px}.people-dots{grid-template-columns:repeat(7,14px);gap:14px}.people-dots i{width:14px;height:14px}.study-metrics{grid-template-columns:1fr}.sessions{gap:5px}.session small{font-size:8px}.breadth-row{grid-template-columns:75px 1fr 28px;gap:10px}.breadth-row>span{font-size:13px}.chart-note{margin-left:0}.career-scale{padding:6px 0 14px}.career-endpoints{gap:18px;margin-bottom:52px}.career-age strong{font-size:22px}.career-age span{font-size:12px}.career-line:before{left:-2px}.career-line:after{right:-2px}.career-labels{font-size:8px}.career-note{text-align:center;font-size:12px}.geo-field{border-radius:14px}.geo-axis-x,.geo-axis-y,.equator-label{display:none}.equator{left:0;right:0}.prime-meridian{top:0;bottom:0}.place i{width:12px;height:12px;border-width:3px}.place span{display:none}.place:focus span{display:block;font-size:8px;left:15px}.country-list{grid-template-columns:1fr 1fr}.perspective-list{grid-template-columns:1fr}.topic-slot{height:310px}.branch-list{grid-template-columns:1fr}.topic-face{padding:20px}.topic-title{font-size:34px}.topic-flip.is-flipped{width:calc(100vw - 28px);height:min(620px,calc(100dvh - 28px))}.topic-flip.is-flipped .topic-face{padding:22px}.topic-flip.is-flipped .topic-back h4{margin:10px 0 7px;padding-right:42px;font-size:27px}.topic-flip.is-flipped .topic-back p{font-size:15px;line-height:1.36}.topic-flip.is-flipped .topic-details{gap:5px;margin:8px 0;font-size:14px;line-height:1.3}.topic-flip.is-flipped .topic-links{gap:5px;margin:2px 0 8px}.topic-flip.is-flipped .topic-link{padding:7px 9px;font-size:9px}.topic-flip.is-flipped .topic-takeaway{padding-top:8px;font-size:16px}.timeline{min-height:700px}.track{margin-top:70px}.dot{width:46px;height:46px}.track:before{top:22px}.moment strong{font-size:34px}.path{min-height:500px;padding:20px}.path h2{font-size:16vw}.path-orb{width:90px;height:90px;right:20px;bottom:20px}footer{min-height:320px;grid-template-columns:1fr 1fr;padding:24px 20px}.footer-orb{display:none} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
@@ -269,7 +291,7 @@
 
   <header class="nav mono">
     <a class="brand" href="#top">CAPSTONE<b>●</b></a>
-    <nav class="nav-links" aria-label="Primary navigation"><a href="#overview">Overview</a><a href="#pathways">Pathways</a><a href="#data">Data</a></nav>
+    <nav class="nav-links" aria-label="Primary navigation"><a href="#overview">Overview</a><a href="#pathways">Pathways</a><a href="#roadmap">Roadmap</a><a href="#data">Data</a></nav>
     <span class="edition">01—07</span>
   </header>
 
@@ -305,8 +327,37 @@
       <div class="branch-head reveal"><span class="mono">02 / Pathway</span><h2>Business Leaders</h2></div>
       <div class="branch-content"><div class="branch-list" id="leader-list"></div></div>
     </section>
+
+    <section class="roadmap-section" id="roadmap">
+      <div class="section-label mono">03 / Action roadmap</div>
+      <div class="roadmap-heading reveal">
+        <h2>3—6—9</h2>
+        <p>A phased plan for turning the project’s recommendations into practical tools and consistent intern experiences.</p>
+      </div>
+      <ol class="roadmap-grid" aria-label="Three, six, and nine month roadmap">
+        <li class="roadmap-step reveal">
+          <div class="roadmap-month"><strong>3</strong><span>Months</span></div>
+          <div class="roadmap-copy"><h3>Integrating the toolkit into EVA</h3></div>
+        </li>
+        <li class="roadmap-step reveal">
+          <div class="roadmap-month"><strong>6</strong><span>Months</span></div>
+          <div class="roadmap-copy"><h3>Creating a Session-in-the-Box for Self-Advocacy</h3></div>
+        </li>
+        <li class="roadmap-step reveal">
+          <div class="roadmap-month"><strong>9</strong><span>Months</span></div>
+          <div class="roadmap-copy">
+            <h3>Reevaluate internship programs cross-sectionally</h3>
+            <ul class="roadmap-actions">
+              <li>Ensure consistency across the board</li>
+              <li>Create a brochure or toolkit available to all regional interns</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
     <section class="data-dashboard" id="data">
-      <div class="section-label mono">03 / Focus group coverage</div>
+      <div class="section-label mono">04 / Focus group coverage</div>
       <div class="data-heading reveal">
         <h2>Research<br>at a glance</h2>
         <p>Focus group demographic coverage across participation, geography, career stage, teams, and roles.</p>
