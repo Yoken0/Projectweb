@@ -87,10 +87,13 @@
     .roadmap-section .section-label { position:relative; z-index:1; border-color:#f8f7f34d; }
     .roadmap-heading { position:relative; z-index:1; display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin:12px 0 clamp(60px,8vw,110px); }
     .roadmap-heading h2 { display:flex; align-items:baseline; margin:0; font-size:clamp(90px,17vw,250px); line-height:.72; letter-spacing:-.095em; }
-    .roadmap-heading-month--3 { color:var(--cyan); }
-    .roadmap-heading-month--6 { color:var(--pink); }
-    .roadmap-heading-month--9 { color:var(--cream); }
-    .roadmap-heading-separator { color:#f8f7f366; }
+    .roadmap-heading-month--3 { color: var(--cyan); }
+    .roadmap-heading-month--6 { color: var(--pink); }
+    .roadmap-heading-month--9 { color: var(--cream); }
+
+    .roadmap-heading-separator {
+      color: #f8f7f366;
+    }
     .roadmap-heading p { max-width:370px; margin:0 0 8px; color:#f8f7f3c2; font-size:17px; line-height:1.55; }
     .roadmap-grid { position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:0; padding:0; border-top:1px solid #f8f7f34d; border-bottom:1px solid #f8f7f34d; list-style:none; }
     .roadmap-step { position:relative; min-height:430px; padding:32px; display:flex; flex-direction:column; border-right:1px solid #f8f7f34d; overflow:hidden; }
@@ -335,7 +338,13 @@
     <section class="roadmap-section" id="roadmap">
       <div class="section-label mono">03 / Action roadmap</div>
       <div class="roadmap-heading reveal">
-        <h2 aria-label="3, 6, and 9 months"><span class="roadmap-heading-month roadmap-heading-month--3">3</span><span class="roadmap-heading-separator" aria-hidden="true">—</span><span class="roadmap-heading-month roadmap-heading-month--6">6</span><span class="roadmap-heading-separator" aria-hidden="true">—</span><span class="roadmap-heading-month roadmap-heading-month--9">9</span></h2>
+        <h2 aria-label="3, 6, and 9 months">
+  <span class="roadmap-heading-month roadmap-heading-month--3">3</span>
+  <span class="roadmap-heading-separator" aria-hidden="true">—</span>
+  <span class="roadmap-heading-month roadmap-heading-month--6">6</span>
+  <span class="roadmap-heading-separator" aria-hidden="true">—</span>
+  <span class="roadmap-heading-month roadmap-heading-month--9">9</span>
+      </h2>
         <p>A phased plan for turning the project’s recommendations into practical tools and consistent intern experiences.</p>
       </div>
       <ol class="roadmap-grid" aria-label="Three, six, and nine month roadmap">
